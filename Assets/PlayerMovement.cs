@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
     Vector3 direction;
     public float playerSpeed;
+    public GameObject particleEffectsPrefab;
+    public Text scoreText;
+    public int score=0;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
@@ -30,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         transform.Translate(direction * playerSpeed * Time.deltaTime);
+
+        scoreText.text = "Score : " + score;
     }
 
 
@@ -37,7 +43,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.tag == "PickUpCoin")
         {
+           
             other.gameObject.SetActive(false);
+            score = score + 5;
+            Instantiate(particleEffectsPrefab, transform.position, Quaternion.identity);
+            
         }
     }
 
