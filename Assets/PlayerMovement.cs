@@ -31,4 +31,14 @@ public class PlayerMovement : MonoBehaviour
         }
         transform.Translate(direction * playerSpeed * Time.deltaTime);
     }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "PickUpCoin")
+        {
+            other.gameObject.SetActive(false);
+        }
+    }
+
 }
